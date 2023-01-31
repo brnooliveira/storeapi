@@ -1,0 +1,11 @@
+{
+  "name": "baltanodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security"
+  }
+}
