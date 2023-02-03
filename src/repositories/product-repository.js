@@ -2,40 +2,44 @@
 const mongoose = require("mongoose");
 const Product = mongoose.model("Product");
 
-exports.get = () => {
-  return Product.find(
+exports.get = async () => {
+  const product = await Product.find(
     {
       active: true,
     },
     "title price slug"
   );
+  return product;
 };
 
-exports.getBySlug = (slug) => {
-  return Product.findOne(
+exports.getBySlug = async (slug) => {
+  const product = await Product.findOne(
     { slug: slug, active: true },
     "title description price slug tags"
   );
+  return product;
 };
 
-exports.getById = (id) => {
-  return Product.findById(id);
+exports.getById = async (id) => {
+  const product = await Product.findById(id);
+  return product;
 };
 
-exports.getByTag = (tag) => {
-  return Product.find(
+exports.getByTag = async (tag) => {
+  const product = Product.find(
     { tags: tag, active: true },
     "title description price slug tags"
   );
+  return product;
 };
 
-exports.create = (body) => {
+exports.create = async (body) => {
   var product = new Product(body);
-  return product.save();
+  await product.save();
 };
 
-exports.update = (id, body) => {
-  return Product.findByIdAndUpdate(id, {
+exports.update = async (id, body) => {
+  await Product.findByIdAndUpdate(id, {
     $set: {
       title: body.title,
       description: body.description,
@@ -45,6 +49,6 @@ exports.update = (id, body) => {
   });
 };
 
-exports.delete = (id) => {
-  return Product.findByIdAndRemove(id);
+exports.delete = async (id) => {
+  await Product.findByIdAndRemove(id);
 };
